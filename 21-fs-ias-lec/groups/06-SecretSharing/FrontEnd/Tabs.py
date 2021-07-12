@@ -123,7 +123,7 @@ class ContactAddWidget(QWidget):
         self.setLayout(self.hbox)
 
         self.requesterLabel = QLabel()
-        self.requesterLabel.setText(self.pub_key)
+        self.requesterLabel.setText(self.pub_key.hex())
         self.hbox.addWidget(self.requesterLabel)
 
         self.nameInput = QLineEdit()
@@ -138,7 +138,7 @@ class ContactAddWidget(QWidget):
 
     def addToContacts(self):
         act.contacts.load()
-        act.create_new_contact(self.nameInput.text(), self.pub_key)
+        act.create_new_contact(self.nameInput.text(), self.pub_key.hex())
         act.contacts.save()
         self.deleteLater()
         print(self.parent())

@@ -329,11 +329,11 @@ def process_package_return_request(contact, key, password: str, their_mapping) -
 # #~~~~~~~~~~~ Testing for database (temporary) ~~~~~~~ ~~~~~~~
 #
 #
-# def create_user(username):
-#     rq_handler.create_user(username)
+def create_user(username):
+    rq_handler.create_user(username)
 #
-# def logged_in():
-#     return rq_handler.logged_in
+def logged_in():
+    return rq_handler.logged_in
 #
 # def append_test_message():
 #

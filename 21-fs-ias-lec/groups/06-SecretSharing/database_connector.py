@@ -1,5 +1,5 @@
 from logStore.appconn import connection
-import EventCreationTool
+from code.logMerge import EventCreationTool
 import json, os
 
 
@@ -66,6 +66,14 @@ class RequestHandler:
         print(f"feed_id:{feed_id} with username: {username} created")
         os.replace(script_dir +"/"+  feed_id.hex() + ".key", os.path.join(script_dir,"data/keys/" + feed_id.hex() + ".key"))
         self.event_factory.set_path_to_keys(os.path.join(script_dir, "data/keys/"))
+
+
+        content = {
+                 'messagekey': json.dumps({'test': "this is a test dict"}),
+                 'chat_id': "fuck you",
+                 'timestampkey': 11}
+        event = self.event_factory.next_event("chat/secret", content)
+        self.db_connection.insert_event(event)
         with open(abs_path, "w") as fd:
             user_dict = {
                 "username": username,

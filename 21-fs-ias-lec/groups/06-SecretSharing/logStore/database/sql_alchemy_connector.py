@@ -28,6 +28,7 @@ class SqLiteDatabase:
                 logger.debug("DBType is not found in DB_ENGINE")
         except Exception as e:
             logger.error(e)
+            raise ValueError("val error")
         finally:
             with self.session_scope():
                 return
@@ -46,6 +47,7 @@ class SqLiteDatabase:
             metadata.create_all(self.__db_engine)
         except Exception as e:
             logger.error(e)
+            raise ValueError("val error")
 
     def insert_byte_array(self, feed_id, seq_no, event_as_cbor):
         with self.session_scope() as session:
@@ -108,6 +110,7 @@ class SqLiteDatabase:
             metadata.create_all(self.__db_engine)
         except Exception as e:
             logger.error(e)
+            raise ValueError("val error")
 
     def insert_master_event(self, master, feed_id, app_feed_id, trust_feed_id, seq_no, trust, name, radius,
                             event_as_cbor, app_name):
@@ -261,6 +264,7 @@ class SqLiteDatabase:
             metadata.create_all(self.__db_engine)
         except Exception as e:
             logger.error(e)
+            raise ValueError("val error")
 
     def insert_kotlin_event(self, feed_id, seq_no, application, username, oldusername, timestamp, text):
         with self.session_scope() as session:
@@ -343,6 +347,7 @@ class SqLiteDatabase:
             metadata.create_all(self.__db_engine)
         except Exception as e:
             logger.error(e)
+            raise ValueError("val error")
 
     def insert_event(self, feed_id, seq_no, application, chat_id, timestamp, data):
         with self.session_scope() as session:
@@ -383,6 +388,8 @@ class SqLiteDatabase:
             session.commit()
         except Exception as e:
             logger.error(e)
+            print("session scope error")
+            raise ValueError("val error")
             session.rollback()
             return -1
         finally:
